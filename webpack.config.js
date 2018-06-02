@@ -1,5 +1,8 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: './src/index.js',
+  target: 'node',
   output: {
     filename: './bundle.js'
   },
@@ -9,5 +12,8 @@ module.exports = {
   },
   module: {
     rules: []
-  }
+  },
+  plugins: [
+    new webpack.IgnorePlugin(/^encoding$/, /node-fetch/),
+  ]
 };

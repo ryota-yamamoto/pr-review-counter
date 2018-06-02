@@ -4,7 +4,7 @@
   "description": "Pull Request Review Counter",
   "private": true,
   "scripts": {
-    "watch": "webpack --mode=production --watch",
+    "watch": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
   },
   "repository": {
@@ -13,7 +13,12 @@
   },
   "author": "Ryota Yamamoto",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "apollo-boost": "^0.1.7",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
+    "node-fetch": "^2.1.2"
+  },
   "devDependencies": {
     "webpack": "^4.10.2",
     "webpack-cli": "^3.0.0"
