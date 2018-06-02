@@ -19,6 +19,7 @@
     "apollo-boost": "^0.1.7",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
+    "moment": "^2.22.2",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
