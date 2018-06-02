@@ -22,27 +22,18 @@ const main = async () => {
       const reviews = pr.reviews.edges
       const prAuthorLogin = pr.author.login
 
-      comments.forEach(({ node: { createdAt, url, author: { login } } }) => {
-        if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
-          return
-        }
+      comments
+        .concat(reviews)
+        .forEach(({ node: { createdAt, url, author: { login } } }) => {
+          if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
+            return
+          }
 
-        const user = countMap[login] || new User(login)
-        user.increment()
-        user.urls.push(url)
-        countMap[login] = user
-      })
-
-      reviews.forEach(({ node: { createdAt, url, author: { login } } }) => {
-        if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
-          return
-        }
-
-        const user = countMap[login] || new User(login)
-        user.increment()
-        user.urls.push(url)
-        countMap[login] = user
-      })
+          const user = countMap[login] || new User(login)
+          user.increment()
+          user.urls.push(url)
+          countMap[login] = user
+        })
     })
     displayCountMap(countMap)
   } catch (error) {
