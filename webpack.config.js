@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -13,6 +14,22 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'eslint-loader',
+            options: {
+              fix: true,
+              failOnError: true,
+            },
+          },
+        ],
+      },
+      {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'eslint-loader',
@@ -20,5 +37,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.IgnorePlugin(/^encoding$/, /node-fetch/)],
+  plugins: [new webpack.IgnorePlugin(/^encoding$/, /node-fetch/), new Dotenv()],
 }
