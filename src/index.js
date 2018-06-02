@@ -1,5 +1,5 @@
 import client from '~/apolloClient'
-import Count from '~/Count'
+import User from '~/User'
 import { getPullRequest } from '~/queries'
 import { displayCountMap, isLastOneWeek } from '~/utility'
 
@@ -27,11 +27,10 @@ const main = async () => {
           return
         }
 
-        const count =
-          countMap[login] !== undefined ? countMap[login] : new Count(login)
-        count.increment()
-        count.urls.push(url)
-        countMap[login] = count
+        const user = countMap[login] || new User(login)
+        user.increment()
+        user.urls.push(url)
+        countMap[login] = user
       })
 
       reviews.forEach(({ node: { createdAt, url, author: { login } } }) => {
@@ -39,11 +38,10 @@ const main = async () => {
           return
         }
 
-        const count =
-          countMap[login] !== undefined ? countMap[login] : new Count(login)
-        count.increment()
-        count.urls.push(url)
-        countMap[login] = count
+        const user = countMap[login] || new User(login)
+        user.increment()
+        user.urls.push(url)
+        countMap[login] = user
       })
     })
     displayCountMap(countMap)

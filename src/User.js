@@ -1,4 +1,4 @@
-export default class Count {
+export default class User {
   constructor(name) {
     this.name = name
     this.count = 0
