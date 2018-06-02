@@ -2,9 +2,10 @@
   "name": "pr-review-counter",
   "version": "1.0.0",
   "description": "Pull Request Review Counter",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --mode=production --watch",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -12,11 +13,9 @@
   },
   "author": "Ryota Yamamoto",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ryota-yamamoto/pr-review-counter/issues"
-  },
-  "homepage": "https://github.com/ryota-yamamoto/pr-review-counter#readme",
-  "dependencies": {
-    "graphql-tag": "^2.9.2"
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.0"
   }
 }
