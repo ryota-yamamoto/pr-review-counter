@@ -9,15 +9,16 @@ const query = gql`
   }
 `
 
-client
-  .query({
-    query,
-  })
-  .then(res => {
+const main = async () => {
+  try {
+    const res = await client.query({
+      query,
+    })
     // eslint-disable-next-line
     console.log(res)
-  })
-  .catch(error => {
-    // eslint-disable-next-line
-    console.log(error)
-  })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+main()
