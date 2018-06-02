@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   root: true,
   env: {
@@ -10,11 +12,12 @@ module.exports = {
     sourceType: 'module',
   },
   extends: ['prettier', 'airbnb-base'],
-  // required to lint *.vue files
   plugins: ['prettier'],
   settings: {
     'import/resolver': {
-      alias: [],
+      alias: {
+        map: [['~', path.join(__dirname, 'src/')]],
+      },
     },
     'import/core-modules': [],
   },
