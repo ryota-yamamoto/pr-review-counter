@@ -37,5 +37,8 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.IgnorePlugin(/^encoding$/, /node-fetch/), new Dotenv()],
+  plugins: [
+    new webpack.IgnorePlugin(/^encoding$/, /node-fetch/),
+    new Dotenv({ path: './src/.env' }),
+  ],
 }
