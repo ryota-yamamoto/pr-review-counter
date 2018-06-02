@@ -1,0 +1,3 @@
+{
+  "presets": ["aws-lambda"]
+}
