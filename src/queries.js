@@ -12,6 +12,9 @@ export const getPullRequest = after => gql`
           node {
             id
             updatedAt
+            author {
+              login
+            }
             comments(first: 100) {
               edges {
                 node {

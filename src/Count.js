@@ -1,5 +1,5 @@
 export default class Count {
-  construct(name) {
+  constructor(name) {
     this.name = name
     this.count = 0
     this.urls = []

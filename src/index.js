@@ -20,9 +20,10 @@ const main = async () => {
     pullRequests.edges.forEach(({ node: pr }) => {
       const comments = pr.comments.edges
       const reviews = pr.reviews.edges
+      const prAuthorLogin = pr.author.login
 
       comments.forEach(({ node: { createdAt, url, author: { login } } }) => {
-        if (!isLastOneWeek(createdAt)) {
+        if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
           return
         }
 
@@ -30,10 +31,11 @@ const main = async () => {
           countMap[login] !== undefined ? countMap[login] : new Count(login)
         count.increment()
         count.urls.push(url)
+        countMap[login] = count
       })
 
       reviews.forEach(({ node: { createdAt, url, author: { login } } }) => {
-        if (!isLastOneWeek(createdAt)) {
+        if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
           return
         }
 
@@ -41,6 +43,7 @@ const main = async () => {
           countMap[login] !== undefined ? countMap[login] : new Count(login)
         count.increment()
         count.urls.push(url)
+        countMap[login] = count
       })
     })
     displayCountMap(countMap)

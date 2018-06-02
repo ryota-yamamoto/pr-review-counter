@@ -1,15 +1,20 @@
 import moment from 'moment'
 
-export const displayCountMap = countMap => {
-  const displayArray = Object.entries(countMap)
+export const displayCountMap = (countMap, shouldShowUrls = false) => {
+  const countArray = Object.entries(countMap)
     .map(([key, value]) => ({
       name: key,
-      count: value,
+      count: value.count,
+      urls: value.urls,
     }))
     .filter(({ name }) => name !== 'hera')
     .sort((a, b) => b.count - a.count)
 
-  console.table(displayArray) // eslint-disable-line
+  if (shouldShowUrls) {
+    console.log(countArray) // eslint-disable-line
+  } else {
+    console.table(countArray, ['name', 'count']) // eslint-disable-line
+  }
 }
 
 const oneWeekBefore = moment().subtract(7, 'days')
