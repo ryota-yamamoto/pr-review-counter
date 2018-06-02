@@ -22,9 +22,16 @@ const main = async () => {
       const reviews = pr.reviews.edges
       const prAuthorLogin = pr.author.login
 
-      comments
-        .concat(reviews)
-        .forEach(({ node: { createdAt, url, author: { login } } }) => {
+      const commentsAndReviews = [...comments, ...reviews]
+
+      commentsAndReviews.forEach(
+        ({
+          node: {
+            createdAt,
+            url,
+            author: { login },
+          },
+        }) => {
           if (!isLastOneWeek(createdAt) || prAuthorLogin === login) {
             return
           }
@@ -33,7 +40,8 @@ const main = async () => {
           user.increment()
           user.urls.push(url)
           countMap[login] = user
-        })
+        },
+      )
     })
     displayCountMap(countMap)
   } catch (error) {

@@ -33,6 +33,8 @@ module.exports = {
     ],
 
     semi: ['error', 'never'],
+    'function-paren-newline': ['off'], // prettier does this
+    'comma-dangle': ['off'], // prettier does this
     'no-param-reassign': ['error', { props: false }],
     'arrow-parens': ['error', 'as-needed'],
     'consistent-return': ['off'],
