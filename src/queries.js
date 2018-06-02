@@ -15,22 +15,22 @@ export const getPullRequest = after => gql`
             comments(first: 100) {
               edges {
                 node {
-                  url
                   author {
                     login
                   }
-                  bodyText
+                  url
+                  createdAt
                 }
               }
             }
             reviews(first: 100) {
               edges {
                 node {
-                  url
                   author {
                     login
                   }
-                  bodyText
+                  url
+                  createdAt
                 }
               }
             }
