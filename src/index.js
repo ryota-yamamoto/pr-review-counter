@@ -18,11 +18,8 @@ const main = async () => {
     })
 
     pullRequests.edges.forEach(({ node: pr }) => {
-      const comments = pr.comments.edges
-      const reviews = pr.reviews.edges
       const prAuthorLogin = pr.author.login
-
-      const commentsAndReviews = [...comments, ...reviews]
+      const commentsAndReviews = [...pr.comments.edges, ...pr.reviews.edges]
 
       commentsAndReviews.forEach(
         ({
