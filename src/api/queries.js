@@ -6,7 +6,10 @@ export const getPullRequest = (
   reviewAfter = null,
 ) => gql`
   {
-    repository(owner: "RettyInc", name: "retty_design") {
+    repository(
+      owner: ${process.env.GITHUB_ORGANIZATION},
+      name: ${process.env.GITHUB_REPOSITORY}
+    ) {
       pullRequests(
         first: 100
         orderBy: { field: UPDATED_AT, direction: DESC }

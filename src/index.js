@@ -1,7 +1,7 @@
-import client from '~/apolloClient'
-import User from '~/User'
-import { getPullRequest } from '~/queries'
-import { displayCountMap, isLastOneWeek, range } from '~/utility'
+import client from '~/api/apolloClient'
+import { getPullRequest } from '~/api/queries'
+import User from '~/models/User'
+import { displayCountMap, isLastOneWeek, range } from '~/utility/index'
 
 const main = async () => {
   const countMap = {}
