@@ -1,22 +1,27 @@
 import gql from 'graphql-tag'
 
-export const getPullRequest = after => gql`
+export const getPullRequest = (
+  prAfter = null,
+  commentAfter = null,
+  reviewAfter = null,
+) => gql`
   {
     repository(owner: "RettyInc", name: "retty_design") {
       pullRequests(
         first: 100
         orderBy: { field: UPDATED_AT, direction: DESC }
-        after: ${after}
+        after: ${prAfter}
       ) {
         edges {
+          cursor
           node {
-            id
             updatedAt
             author {
               login
             }
-            comments(first: 100) {
+            comments(first: 2, after: ${commentAfter}) {
               edges {
+                cursor
                 node {
                   author {
                     login
@@ -26,8 +31,9 @@ export const getPullRequest = after => gql`
                 }
               }
             }
-            reviews(first: 100) {
+            reviews(first: 2, after: ${reviewAfter}) {
               edges {
+                cursor
                 node {
                   author {
                     login

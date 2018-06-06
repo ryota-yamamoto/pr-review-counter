@@ -11,7 +11,8 @@ export const displayCountMap = (countMap, shouldShowUrls = false) => {
     .sort((a, b) => b.count - a.count)
 
   if (shouldShowUrls) {
-    console.log(countArray) // eslint-disable-line
+    const tmp = countArray.find(a => a.name === 'ryota-yamamoto')
+    tmp.urls.forEach(element => console.log(element)) // eslint-disable-line
   } else {
     console.table(countArray, ['name', 'count']) // eslint-disable-line
   }
@@ -21,3 +22,5 @@ const oneWeekBefore = moment().subtract(7, 'days')
 
 export const isLastOneWeek = createdAt =>
   moment(createdAt).isSameOrAfter(oneWeekBefore)
+
+export const range = num => [...Array(num).keys()]
