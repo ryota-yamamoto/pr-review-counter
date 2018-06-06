@@ -1,8 +1,13 @@
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from 'apollo-boost'
-import fetch from 'node-fetch'
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+} from 'apollo-boost';
+import fetch from 'node-fetch';
 
 const authLink = (operation, forward) => {
-  const token = process.env.GITHUB_API_TOKEN
+  const token = process.env.GITHUB_API_TOKEN;
 
   operation.setContext(context => ({
     ...context,
@@ -10,10 +15,10 @@ const authLink = (operation, forward) => {
       ...context.headers,
       authorization: `Bearer ${token}`,
     },
-  }))
+  }));
 
-  return forward(operation)
-}
+  return forward(operation);
+};
 
 const link = ApolloLink.from([
   authLink,
@@ -21,9 +26,9 @@ const link = ApolloLink.from([
     uri: 'https://api.github.com/graphql',
     fetch,
   }),
-])
+]);
 
 export default new ApolloClient({
   link,
   cache: new InMemoryCache(),
-})
+});

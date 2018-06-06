@@ -1,10 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-export const getPullRequest = (
-  prAfter = null,
-  commentAfter = null,
-  reviewAfter = null,
-) => gql`
+export const createPullRequestQuery = (after = null) => gql`
   {
     repository(
       owner: ${process.env.GITHUB_ORGANIZATION},
@@ -13,7 +9,7 @@ export const getPullRequest = (
       pullRequests(
         first: 100
         orderBy: { field: UPDATED_AT, direction: DESC }
-        after: ${prAfter}
+        after: ${after}
       ) {
         edges {
           cursor
@@ -22,7 +18,7 @@ export const getPullRequest = (
             author {
               login
             }
-            comments(first: 2, after: ${commentAfter}) {
+            comments(first: 100) {
               edges {
                 cursor
                 node {
@@ -34,7 +30,7 @@ export const getPullRequest = (
                 }
               }
             }
-            reviews(first: 2, after: ${reviewAfter}) {
+            reviews(first: 100) {
               edges {
                 cursor
                 node {
@@ -51,6 +47,24 @@ export const getPullRequest = (
       }
     }
   }
-`
+`;
 
-export const GET = ''
+export const createCommentsQuery = (after = null) => gql`
+  {
+    pullRequest(number: 1929) {
+      id
+      comments(first: 100: after: ${after}) {
+        edges {
+          cursor
+          node {
+            author {
+              login
+            }
+            url
+            createdAt
+          }
+        }
+      }
+    }
+  }
+`;

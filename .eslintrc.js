@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   root: true,
@@ -28,11 +28,11 @@ module.exports = {
       {
         singleQuote: true,
         trailingComma: 'all',
-        semi: false,
+        semi: true,
       },
     ],
 
-    semi: ['error', 'never'],
+    semi: ['off'], // prettier does this
     'function-paren-newline': ['off'], // prettier does this
     'comma-dangle': ['off'], // prettier does this
     'no-param-reassign': ['error', { props: false }],
@@ -40,5 +40,6 @@ module.exports = {
     'consistent-return': ['off'],
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'max-len': ['error', { code: 80, ignoreUrls: true }],
+    'no-underscore-dangle': ['error', { allow: ['__typename'] }],
   },
-}
+};

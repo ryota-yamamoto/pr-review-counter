@@ -1,6 +1,6 @@
-const webpack = require('webpack')
-const Dotenv = require('dotenv-webpack')
-const path = require('path')
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -45,4 +45,4 @@ module.exports = {
     new webpack.IgnorePlugin(/^encoding$/, /node-fetch/),
     new Dotenv({ path: './src/.env' }),
   ],
-}
+};
