@@ -8,7 +8,5 @@ export const yesterday = moment()
   .subtract(1, 'days')
   .startOf('day');
 
-export const today = moment().startOf('day');
-
 export const isLastOneWeek = createdAt =>
-  moment(createdAt).isBetween(oneWeekBefore, today, null, '[]');
+  moment(createdAt).isBetween(oneWeekBefore, yesterday, 'day', '[]');
