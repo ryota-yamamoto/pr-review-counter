@@ -1,4 +1,4 @@
-import { isLastOneWeek } from '~/utility/index';
+import { isLastOneWeek } from '~/utility/time';
 
 export const commentAndReviewFilter = (itemAuthor, prAuthor, createdAt) =>
   itemAuthor.__typename !== 'Bot' &&

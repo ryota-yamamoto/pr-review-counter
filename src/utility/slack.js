@@ -1,7 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
+import { oneWeekBefore, yesterday } from '~/utility/time';
 
-export default async text => {
+export const sendToSlack = async text => {
   const url = 'https://slack.com/api/chat.postMessage';
   const data = {
     token: process.env.SLACK_TOKEN,
@@ -13,4 +14,16 @@ export default async text => {
   };
 
   return axios.post(url, qs.stringify(data));
+};
+
+export const addInfo = countTableString => {
+  const dateFomrat = 'YYYY/MM/DD ddd';
+  return `
+\`\`\`
+${process.env.GITHUB_ORGANIZATION}/${process.env.GITHUB_REPOSITORY}
+
+${oneWeekBefore.format(dateFomrat)} ~ ${yesterday.format(dateFomrat)}
+${countTableString}
+\`\`\`
+`;
 };

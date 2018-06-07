@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Table from 'cli-table';
 
 export const range = num => [...Array(num).keys()];
@@ -27,8 +26,3 @@ export const createCountTable = countMap => {
 
   return table.toString().replace(/\[90m|\[39m|\[31m/g, '');
 };
-
-export const oneWeekBefore = moment().subtract(7, 'days');
-
-export const isLastOneWeek = createdAt =>
-  moment(createdAt).isSameOrAfter(oneWeekBefore);

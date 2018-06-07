@@ -1,10 +1,9 @@
-import moment from 'moment';
 import client from '~/api/apolloClient';
+import User from '~/model/User';
 import { createPullRequestQuery } from '~/api/queries';
 import { extractCommentAndReview } from '~/counter/index';
-import User from '~/model/User';
-import { oneWeekBefore, createCountTable } from '~/utility/index';
-import sendToSlack from '~/utility/slack';
+import { createCountTable } from '~/utility/table';
+import { sendToSlack, addInfo } from '~/utility/slack';
 
 const main = async () => {
   const query = createPullRequestQuery(null, null, null);
@@ -26,15 +25,7 @@ const main = async () => {
   );
 
   const countTableString = createCountTable(countMap);
-  const dateFomrat = 'YYYY/MM/DD';
-  const text = `
-\`\`\`
-${process.env.GITHUB_ORGANIZATION}/${process.env.GITHUB_REPOSITORY}
-
-${oneWeekBefore.format(dateFomrat)} ~ ${moment().format(dateFomrat)}
-${countTableString}
-\`\`\`
-`;
+  const text = addInfo(countTableString);
   await sendToSlack(text);
 };
 
