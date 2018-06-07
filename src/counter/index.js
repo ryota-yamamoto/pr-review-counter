@@ -1,3 +1,4 @@
+import User from '~/model/User';
 import { isLastOneWeek } from '~/utility/time';
 
 export const commentAndReviewFilter = (itemAuthor, prAuthor, createdAt) =>
@@ -16,5 +17,13 @@ export const extractCommentAndReview = prEedges =>
     acc = [...acc, ...commentAndReviews];
     return acc;
   }, []);
+
+export const createCountMap = commentAndReviewEdges =>
+  commentAndReviewEdges.reduce((countMapAcc, { node: { author } }) => {
+    const user = countMapAcc[author.login] || new User(author.login);
+    user.increment();
+    countMapAcc[author.login] = user;
+    return countMapAcc;
+  }, {});
 
 export const hoge = '';
