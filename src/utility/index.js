@@ -1,7 +1,10 @@
 import moment from 'moment';
+import Table from 'cli-table';
 
-export const displayCountMap = (countMap, shouldShowUrls = false) => {
-  const countArray = Object.entries(countMap)
+export const range = num => [...Array(num).keys()];
+
+export const sortCountMap = countMap =>
+  Object.entries(countMap)
     .map(([key, value]) => ({
       name: key,
       count: value.count,
@@ -10,17 +13,22 @@ export const displayCountMap = (countMap, shouldShowUrls = false) => {
     .filter(({ name }) => name !== 'hera')
     .sort((a, b) => b.count - a.count);
 
-  if (shouldShowUrls) {
-    const tmp = countArray.find(a => a.name === 'ryota-yamamoto');
-    tmp.urls.forEach(element => console.log(element)); // eslint-disable-line
-  } else {
-    console.table(countArray, ['name', 'count']); // eslint-disable-line
-  }
+export const createCountTable = countMap => {
+  const countArray = sortCountMap(countMap);
+  const table = new Table({
+    head: ['name', 'review count'],
+    style: { compact: true },
+    colAligns: ['left', 'right'],
+  });
+
+  countArray.forEach(count => {
+    table.push([count.name, count.count]);
+  });
+
+  return table.toString().replace(/\[90m|\[39m|\[31m/g, '');
 };
 
-const oneWeekBefore = moment().subtract(7, 'days');
+export const oneWeekBefore = moment().subtract(7, 'days');
 
 export const isLastOneWeek = createdAt =>
   moment(createdAt).isSameOrAfter(oneWeekBefore);
-
-export const range = num => [...Array(num).keys()];
