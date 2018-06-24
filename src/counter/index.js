@@ -13,9 +13,7 @@ export const extractCommentAndReview = prEedges =>
       commentAndReviewFilter(node.author, prNode.author, node.createdAt),
     );
 
-    // eslint-disable-next-line no-param-reassign
-    acc = [...acc, ...commentAndReviews];
-    return acc;
+    return [...acc, ...commentAndReviews];
   }, []);
 
 export const createCountMap = commentAndReviewEdges =>
