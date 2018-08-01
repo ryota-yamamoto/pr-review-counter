@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 
+// eslint-disable-next-line import/prefer-default-export
 export const createPullRequestQuery = (after = null) => gql`
   {
     repository(
@@ -42,26 +43,6 @@ export const createPullRequestQuery = (after = null) => gql`
                 }
               }
             }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const createCommentsQuery = (after = null) => gql`
-  {
-    pullRequest(number: 1929) {
-      id
-      comments(first: 100: after: ${after}) {
-        edges {
-          cursor
-          node {
-            author {
-              login
-            }
-            url
-            createdAt
           }
         }
       }
